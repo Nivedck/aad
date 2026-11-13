@@ -26,24 +26,33 @@ int tsp(int mask,int pos){
     return dp[mask][pos]=ans;
 }
 
-int main(){
-    printf("Enter the number of cities:");
-    scanf("%d",&n);
+int main() {
 
-    for(int i=0;i<(1<<n);i++){
-        for(int j=0;j<n;j++)
-            dp[i][j]=-1;
-    }
+    n = 5;
 
-    printf("Enter the distance matrix:");
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            scanf("%d",&dis[i][j]);
+    int cost[5][5] = {
+        {0, 12, 10, 19, 8},
+        {12, 0, 3, 7, 6},
+        {10, 3, 0, 2, 20},
+        {19, 7, 2, 0, 4},
+        {8, 6, 20, 4, 0}
+    };
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            dis[i][j] = cost[i][j];
         }
     }
 
-    int min_cost = tsp(1,0);
+    for(int i = 0; i < (1<<n); i++) {
+        for(int j = 0; j < n; j++) {
+            dp[i][j] = -1;
+        }
+    }
 
-    printf("Minimum Cost:%d",min_cost);
+    int min_cost = tsp(1, 0);
+
+    printf("Minimum Cost: %d\n", min_cost);
+
+    return 0;
 }
-
